@@ -1,5 +1,7 @@
 package io.github.funkynoodles;
 
+import io.github.funkynoodles.creativetabs.FunkyTab;
+import io.github.funkynoodles.gui.ThermoGui;
 import io.github.funkynoodles.init.FunkyBlocks;
 import io.github.funkynoodles.init.FunkyItems;
 import io.github.funkynoodles.proxy.CommonProxy;
