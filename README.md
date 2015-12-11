@@ -15,7 +15,7 @@ A Minecraft 1.8 mod to make survival mode generally better!
 To make this mod more realistic, I try to model added properties (i.e. temperature) after real world data.
 - Temperature: http://academic.udayton.edu/kissock/http/Weather/
 - http://www.coolantarctica.com/Antarctica%20fact%20file/antarctica%20environment/climate_graph/vostok_south_pole_mcmurdo.php
-  - Desert - Cairo
+  - Desert - Doha, Qatar
   - Jungle - Singapore
   - Forests - NYC
   - Taiga - Fairbanks, AK
