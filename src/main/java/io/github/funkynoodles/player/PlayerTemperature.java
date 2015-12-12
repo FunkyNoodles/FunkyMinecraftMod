@@ -1,5 +1,6 @@
 package io.github.funkynoodles.player;
 
+import io.github.funkynoodles.world.Temperature;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
@@ -16,11 +17,43 @@ public class PlayerTemperature {
 	static String biomeName;
 	static WorldInfo worldInfo = mc.theWorld.getWorldInfo();
 
+	static final float SKIN_THERMAL_CONDUCTIVITY = 0.209f; //source: http://users.ece.utexas.edu/~valvano/research/Thermal.pdf
+	static final double STEPHAN_BOLTZMANN = 5.67 * Math.pow(10, -8);
+	static final float SKIN_EMISSIVITY = 0.99f; // source: http://www.optotherm.com/emiss-table.htm
+
+
+	//Temperature at which human feel best when naked is around 27C, source: http://www.ncbi.nlm.nih.gov/pubmed/17929604
+	//So heat generation by body is roughly 2.09W, considering skin is 1 unit area
+	static double bodyHeadGeneration = 2.09;
+
+	static double bodyTemperature = 37; // in C
+	static double bodyHeatLoss = 0; // in Watts
+	static double totalThermalConductivity;
+
 	//@SubscribeEvent
 	public static void updateTemperature(){
 		blockPos = new BlockPos(mc.getRenderViewEntity().posX, mc.getRenderViewEntity().getEntityBoundingBox().minY, mc.getRenderViewEntity().posZ);
 		chunk = mc.theWorld.getChunkFromBlockCoords(blockPos);
 		biomeName = chunk.getBiome(blockPos, mc.theWorld.getWorldChunkManager()).biomeName;
 		worldInfo.getWorldTime();
+
+		totalThermalConductivity = SKIN_THERMAL_CONDUCTIVITY;
+
+		bodyHeatLoss = bodyHeadGeneration + totalThermalConductivity * (Temperature.getTemperature(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()) - bodyTemperature);
+	}
+
+	public static double getBodyHeatLoss(){
+		return bodyHeatLoss;
+	}
+
+	public static String getHeatFeeling(){
+		String heatFeeling = null;
+		if (bodyHeatLoss < 0.4 && bodyHeatLoss > -0.4) {
+			heatFeeling  = "Normal";
+
+		}else if(bodyHeatLoss < -0.4){
+			heatFeeling = "Chilly";
+		}
+		return heatFeeling;
 	}
 }

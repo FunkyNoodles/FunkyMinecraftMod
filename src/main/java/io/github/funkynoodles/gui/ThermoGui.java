@@ -21,16 +21,13 @@ public class ThermoGui extends GuiIngame{
 	protected final FontRenderer fontRenderer;
 	public static final ResourceLocation funky_icons = new ResourceLocation("minecraft", "textures/gui/funky_icons.png");
 	WorldInfo worldInfo;
+
 	public ThermoGui(Minecraft mcIn) {
 		super(mcIn);
 		this.fontRenderer = mcIn.fontRendererObj;
 		// TODO Auto-generated constructor stub
 		this.mc = mcIn;
 	}
-
-
-
-
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void renderThermoGui(RenderGameOverlayEvent event){
@@ -44,7 +41,7 @@ public class ThermoGui extends GuiIngame{
 		this.mc.renderEngine.bindTexture(funky_icons);
 		this.drawTexturedModalRect(scaledresolution.getScaledWidth()-25, scaledresolution.getScaledHeight()-58, 21, 0, 20, 54);
 		PlayerTemperature.updateTemperature();
-		this.drawCenteredString(fontRenderer, Season.getSeason(), scaledresolution.getScaledWidth()-50, scaledresolution.getScaledHeight()-70, 0xFFFFFF);
+		this.drawCenteredString(fontRenderer, PlayerTemperature.getHeatFeeling(), scaledresolution.getScaledWidth()-50, scaledresolution.getScaledHeight()-70, 0xFFFFFF);
 		this.mc.renderEngine.bindTexture(icons);
 	}
 }

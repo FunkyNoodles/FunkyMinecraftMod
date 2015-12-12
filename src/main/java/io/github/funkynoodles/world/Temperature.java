@@ -1,24 +1,24 @@
 package io.github.funkynoodles.world;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.WorldInfo;
 
 public class Temperature {
 	static Minecraft mc = Minecraft.getMinecraft();
-	static EntityPlayer player = mc.thePlayer;
 
 	float footTemperature;
+
 	static Chunk chunk;
 	static BlockPos blockPos = new BlockPos(mc.getRenderViewEntity().posX, mc.getRenderViewEntity().getEntityBoundingBox().minY, mc.getRenderViewEntity().posZ);
 	static String biomeName;
 	static WorldInfo worldInfo = mc.theWorld.getWorldInfo();
 
-	public static void updateTemperature(){
-		blockPos = new BlockPos(mc.getRenderViewEntity().posX, mc.getRenderViewEntity().getEntityBoundingBox().minY, mc.getRenderViewEntity().posZ);
-		chunk = mc.theWorld.getChunkFromBlockCoords(blockPos);
-		biomeName = chunk.getBiome(blockPos, mc.theWorld.getWorldChunkManager()).biomeName;
+	public static float getTemperature(int x, int y, int z){
+		float seaLevelTemperature = 27.0f;
+		float eyeLevelTemperature = 20.0f;
+		eyeLevelTemperature = seaLevelTemperature - 0.1f * (y - 64);
+		return eyeLevelTemperature;
 	}
 }
