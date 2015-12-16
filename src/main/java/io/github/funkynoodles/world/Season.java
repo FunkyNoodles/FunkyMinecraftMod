@@ -39,4 +39,13 @@ public class Season {
 		}
 		return season;
 	}
+
+	public static double getPecentOfYear(){
+		double percent = 0;
+		long yearTime = 24000 * 30 * 4;
+		totalTime = worldInfo.getWorldTotalTime();
+		worldTime = worldInfo.getWorldTime();
+		percent = ((double)(totalTime % yearTime)) / yearTime;
+		return percent;
+	}
 }

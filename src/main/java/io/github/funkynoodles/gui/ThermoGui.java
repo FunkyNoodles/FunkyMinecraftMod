@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import io.github.funkynoodles.player.PlayerTemperature;
 import io.github.funkynoodles.world.Season;
+import io.github.funkynoodles.world.Temperature;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiIngame;
@@ -42,6 +43,7 @@ public class ThermoGui extends GuiIngame{
 		this.drawTexturedModalRect(scaledresolution.getScaledWidth()-25, scaledresolution.getScaledHeight()-58, 21, 0, 20, 54);
 		PlayerTemperature.updateTemperature();
 		this.drawCenteredString(fontRenderer, PlayerTemperature.getHeatFeeling(), scaledresolution.getScaledWidth()-50, scaledresolution.getScaledHeight()-70, 0xFFFFFF);
+		this.drawCenteredString(fontRenderer, Double.toString(Temperature.getTemperature(mc.thePlayer.getPosition().getX(),mc.thePlayer.getPosition().getY(),mc.thePlayer.getPosition().getZ())), scaledresolution.getScaledWidth()-50, scaledresolution.getScaledHeight()-60, 0xFFFFFF);
 		this.mc.renderEngine.bindTexture(icons);
 	}
 }
