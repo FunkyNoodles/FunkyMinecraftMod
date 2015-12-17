@@ -21,12 +21,12 @@ public class PlayerTemperature {
 	static final double STEPHAN_BOLTZMANN = 5.67 * Math.pow(10, -8);
 	static final float SKIN_EMISSIVITY = 0.99f; // source: http://www.optotherm.com/emiss-table.htm
 
-	static final float CHILLY_BOUNDARY = -0.4f;
-	static final float COLD_BOUNDARY = -0.6f;
-	static final float VERY_COLD_BOUNDARY = -0.8f;
-	static final float WARM_BOUNDARY = 0.4f;
-	static final float HOT_BOUNDARY = 0.6f;
-	static final float VERY_HOT_BOUNDARY = 0.8f;
+	static final float CHILLY_BOUNDARY = -1.0f;
+	static final float WARM_BOUNDARY = 1.0f;
+	static final float COLD_BOUNDARY = -3.2f;
+	static final float HOT_BOUNDARY = 3.2f;
+	static final float VERY_COLD_BOUNDARY = -5.0f;
+	static final float VERY_HOT_BOUNDARY = 5.0f;
 
 
 	//Temperature at which human feel best when naked is around 27C, source: http://www.ncbi.nlm.nih.gov/pubmed/17929604
@@ -48,6 +48,7 @@ public class PlayerTemperature {
 
 		bodyHeatLoss = bodyHeadGeneration + totalThermalConductivity * (Temperature.getTemperature(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()) - bodyTemperature);
 		if(player.isInWater()){
+			bodyHeatLoss -= 1.5f;
 		}
 	}
 

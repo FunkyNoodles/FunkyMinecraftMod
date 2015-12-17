@@ -44,6 +44,8 @@ public class ThermoGui extends GuiIngame{
 		PlayerTemperature.updateTemperature();
 		this.drawCenteredString(fontRenderer, PlayerTemperature.getHeatFeeling(), scaledresolution.getScaledWidth()-50, scaledresolution.getScaledHeight()-70, 0xFFFFFF);
 		this.drawCenteredString(fontRenderer, Double.toString(Temperature.getTemperature(mc.thePlayer.getPosition().getX(),mc.thePlayer.getPosition().getY(),mc.thePlayer.getPosition().getZ())), scaledresolution.getScaledWidth()-50, scaledresolution.getScaledHeight()-60, 0xFFFFFF);
+		this.drawCenteredString(fontRenderer, Season.getSeason(), scaledresolution.getScaledWidth()-50, scaledresolution.getScaledHeight()-50, 0xFFFFFF);
+		this.drawCenteredString(fontRenderer, Double.toString(PlayerTemperature.getBodyHeatLoss()), scaledresolution.getScaledWidth()-50, scaledresolution.getScaledHeight()-40, 0xFFFFFF);
 		this.mc.renderEngine.bindTexture(icons);
 	}
 }

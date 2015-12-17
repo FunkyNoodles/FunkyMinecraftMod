@@ -13,6 +13,9 @@ public class Season {
 	// Current time in ticks 0-23999;
 	static long worldTime;
 
+	static final short monthLength = 1; // in in-game days
+	static final long dayLength = 24000; // in ticks
+
 	public Season(){
 
 	}
@@ -22,7 +25,7 @@ public class Season {
 		String season = null;
 		totalTime = worldInfo.getWorldTotalTime();
 		worldTime = worldInfo.getWorldTime();
-		short seasonNum = (short)((totalTime/24000/30) % 4);
+		short seasonNum = (short)((totalTime/dayLength/monthLength) % 4);
 		switch(seasonNum){
 		case 0:
 			season = "Spring";
@@ -42,10 +45,10 @@ public class Season {
 
 	public static double getPecentOfYear(){
 		double percent = 0;
-		long yearTime = 24000 * 30 * 4;
+		long yearLength = dayLength * monthLength * 4;
 		totalTime = worldInfo.getWorldTotalTime();
 		worldTime = worldInfo.getWorldTime();
-		percent = ((double)(totalTime % yearTime)) / yearTime;
+		percent = ((double)(totalTime % yearLength)) / yearLength;
 		return percent;
 	}
 }
